@@ -33,4 +33,28 @@ router.post('/', (req, res) => {
     })
 })
 
+router.put('/:id', (req, res) => {
+  actions.update(req.params.id, req.body)
+    .then((action) => {
+      res.status(200).json(action)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
+router.delete('/:id', (req, res) => {
+  actions.remove(req.params.id)
+    .then((count) => {
+      if(count === 1) {
+        res.status(200).json({
+          message: "Action has been deleted"
+        })
+      }
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 module.exports = router;
