@@ -25,6 +25,17 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/:id/actions", (req, res) => {
+  projects
+    .getProjectActions(req.params.id)
+    .then((project) => {
+      res.status(200).json(project);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post("/", (req, res) => {
   projects
     .insert(req.body)
