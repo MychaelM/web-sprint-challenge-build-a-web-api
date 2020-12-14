@@ -1,5 +1,6 @@
 const express = require("express");
 const projects = require("./projects-model");
+const { checkProjectId } = require('./projects-middleware')
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", checkProjectId(), (req, res) => {
   projects
     .get(req.params.id)
     .then((project) => {
