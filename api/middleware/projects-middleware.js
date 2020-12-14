@@ -1,11 +1,11 @@
-const projects = require("./projects-model");
+const projects = require("../projects/projects-model");
 
 function checkProjectId() {
   return (req, res, next) => {
     projects.get(req.params.id)
-      .then(user => {
-        if (user) {
-          req.user = user
+      .then(project => {
+        if (project) {
+          req.project = project
           next()
         } else {
           res.status(404).json({

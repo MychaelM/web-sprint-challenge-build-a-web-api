@@ -1,5 +1,7 @@
 const express = require('express');
 const actions = require('./actions-model');
+const { checkActionProjectId } = require("../middleware/actions-middleware");
+
 
 const router = express.Router();
 
@@ -23,7 +25,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', checkActionProjectId(), (req, res) => {
   actions.insert(req.body)
     .then((action) => {
       res.status(201).json(action)
