@@ -36,4 +36,29 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+  projects
+    .update(req.params.id, req.body)
+    .then((project) => {
+      res.status(200).json(project);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  projects.remove(req.params.id)
+    .then((count) => {
+      if (count === 1) {
+        res.status(200).json({
+          message: "Project successfully deleted"
+        })
+      }
+    })
+    .catch((err) => {
+      next();
+    })
+})
+
 module.exports = router;
