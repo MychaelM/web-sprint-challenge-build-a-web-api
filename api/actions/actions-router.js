@@ -13,4 +13,24 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', (req, res) => {
+  actions.get(req.params.id)
+    .then((action) => {
+      res.status(200).json(action)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
+router.post('/', (req, res) => {
+  actions.insert(req.body)
+    .then((action) => {
+      res.status(201).json(action)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
+
 module.exports = router;

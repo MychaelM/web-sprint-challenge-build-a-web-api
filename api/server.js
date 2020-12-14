@@ -1,5 +1,6 @@
 const express = require('express');
 const actionRoutes = require('./actions/actions-router');
+const projectRoutes = require('./projects/projects-router');
 
 const server = express();
 
@@ -10,5 +11,6 @@ server.get('/', (req, res) => {
 })
 
 server.use('/api/actions', actionRoutes)
+server.use('/api/projects', projectRoutes)
 
 module.exports = server;
